@@ -5,26 +5,26 @@
 char *str1;
 char *str2;
 
-int len1 = 1, len2 = 1;
+int len1, len2;
 
 void dynamicProgramming(){
 	int i, j, cur;
-	int mat[len1][len2];
+	int mat[len1+1][len2+1];
 	char lcs[len1];
 	
 	//Init table
-	for( i = 0; i < len1; i++ ){
+	for( i = 0; i < len1+1; i++ ){
 		mat[i][0] = 0;
 	}
 	
-	for( j = 0; j < len2; j++){
+	for( j = 0; j < len2+1; j++){
 		mat[0][j] = 0;
 	}
 	
 	//Fill in table
-	for( i = 1; i < len1; i++ ){
-		for( j = 1; j < len2; j++ ){
-			if( str1[i] == str2[j] ){
+	for( i = 1; i < len1+1; i++ ){
+		for( j = 1; j < len2+1; j++ ){
+			if( str1[i-1] == str2[j-1] ){
 				mat[i][j] = mat[i-1][j-1] + 1;
 			} else {
 				if( mat[i][j-1] > mat[i-1][j] )
@@ -36,23 +36,23 @@ void dynamicProgramming(){
 	}
 	
 	//Print table
-	for( i = 0; i < len1; i++ ){
-		for( j = 0; j < len2; j++){
+	for( i = 0; i < len1+1; i++ ){
+		for( j = 0; j < len2+1; j++){
 			printf("%d ", mat[i][j]);
 		}
 		printf("\n");
 	}
 	
 	//Find LCS
-	cur = mat[len1-1][len2-1];
+	cur = mat[len1][len2];
 	lcs[cur] = '\0';
 	cur--;
-	i = len1-1;
-	j = len2-1;
+	i = len1;
+	j = len2;
 	while( mat[i][j] != 0 ){
 		if((mat[i-1][j] == mat[i][j]-1) &&
 		   (mat[i][j-1] == mat[i][j]-1)){
-			lcs[cur] = str1[j];
+			lcs[cur] = str1[i-1];
 			cur--;
 			i--;
 			j--;
@@ -131,11 +131,11 @@ int main (int argc, char * argv[]) {
 	
 	//Get length of strings
 	//while( str1[counter] != '\0' )
-		len1 = 9;
+		len1 = 8;
 	printf("1\n");
 	counter = 0;
 	//while( str2[counter] != '\0' )
-		len2 = 8;
+		len2 = 7;
 	printf("2\n");
 	//Go to given algorithm method
 	switch( algo ){
