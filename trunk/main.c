@@ -110,12 +110,12 @@ char algoC( int m, int n, char *str1, char *str2 ){
 
 int main (int argc, char * argv[]) {
 	
-	int algo, counter = 0;
+	int algo;
 	
 	//Check command line arguments
-	if( argc != 4 ){
+	if( argc != 6 ){
 		//Print usage message
-		fprintf(stderr, "Usage: LCS algorithm string1 string2\n");
+		fprintf(stderr, "Usage: LCS algorithm length1 string1 length2 string2\n");
 		return -1;
 	}
 	
@@ -123,20 +123,13 @@ int main (int argc, char * argv[]) {
 	algo = atoi( argv[1] );
 	
 	//Set strings
-	str1 = argv[2];
-	str2 = argv[3];
-	
-	printf("%s\n", str1);
-	printf("%s\n", str2);
+	str1 = argv[3];
+	str2 = argv[5];
 	
 	//Get length of strings
-	//while( str1[counter] != '\0' )
-		len1 = 8;
-	printf("1\n");
-	counter = 0;
-	//while( str2[counter] != '\0' )
-		len2 = 7;
-	printf("2\n");
+	len1 = atoi( argv[2] );
+	len2 = atoi( argv[4] );
+	
 	//Go to given algorithm method
 	switch( algo ){
 		case 1:
@@ -153,11 +146,9 @@ int main (int argc, char * argv[]) {
 			//Quadratic-time linear-space
 			break;
 		default:
+			//Invalid state
 			fprintf(stderr, "ERROR: Invalid Algorithm\n");
 	}
-	
-	//Algo B
-	//algoB(9, 8, str1, str2);
 	
     return 0;
 }
