@@ -1,17 +1,23 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
+#include <string.h>
+#include "timing.h"
+
+CPUDEFS
 
 char *str1;
 char *str2;
-
+int recur_count;
 int len1, len2;
 
-void dynamicProgramming(){
+double dynamicProgramming(){
+	double t0, t1;
+	
 	int i, j, cur;
 	int mat[len1+1][len2+1];
 	char lcs[len1];
-	
+	t0=CPUTIME;
 	//Init table
 	for( i = 0; i < len1+1; i++ ){
 		mat[i][0] = 0;
@@ -35,13 +41,6 @@ void dynamicProgramming(){
 		}
 	}
 	
-	//Print table
-	for( i = 0; i < len1+1; i++ ){
-		for( j = 0; j < len2+1; j++){
-			printf("%d ", mat[i][j]);
-		}
-		printf("\n");
-	}
 	
 	//Find LCS
 	cur = mat[len1][len2];
@@ -62,8 +61,20 @@ void dynamicProgramming(){
 			j--;
 		}
 	}
+	t1=CPUTIME;
+	//Print table
+#ifdef VERBOSE	
+	for( i = 0; i < len1+1; i++ ){
+		for( j = 0; j < len2+1; j++){
+			printf("%d ", mat[i][j]);
+		}
+		printf("\n");
+	}
+	
 	
 	printf("LCS: %s\n", lcs);
+#endif
+	return t1-t0;
 }
 
 /*void algoB(int m, int n, char *str1, char *str2){
@@ -109,13 +120,14 @@ char algoC( int m, int n, char *str1, char *str2 ){
  }*/
 
 int main (int argc, char * argv[]) {
-	
+	double time;
+	recur_count=0;
 	int algo;
 	
 	//Check command line arguments
-	if( argc != 6 ){
+	if( argc != 4 ){
 		//Print usage message
-		fprintf(stderr, "Usage: LCS algorithm length1 string1 length2 string2\n");
+		fprintf(stderr, "Usage: LCS algorithm string1 string2\n");
 		return -1;
 	}
 	
@@ -123,12 +135,12 @@ int main (int argc, char * argv[]) {
 	algo = atoi( argv[1] );
 	
 	//Set strings
-	str1 = argv[3];
-	str2 = argv[5];
+	str1 = argv[2];
+	str2 = argv[3];
 	
 	//Get length of strings
-	len1 = atoi( argv[2] );
-	len2 = atoi( argv[4] );
+	len1 = strlen(str1);
+	len2 = strlen(str2);
 	
 	//Go to given algorithm method
 	switch( algo ){
@@ -140,7 +152,7 @@ int main (int argc, char * argv[]) {
 			break;
 		case 3:
 			//dynamic programming
-			dynamicProgramming();
+			time=dynamicProgramming();
 			break;
 		case 4:
 			//Quadratic-time linear-space
@@ -149,6 +161,8 @@ int main (int argc, char * argv[]) {
 			//Invalid state
 			fprintf(stderr, "ERROR: Invalid Algorithm\n");
 	}
-	
+	printf("Algo: %d Time: %f Recursive Calls: %d\n", algo, time, recur_count);
     return 0;
 }
+
+
