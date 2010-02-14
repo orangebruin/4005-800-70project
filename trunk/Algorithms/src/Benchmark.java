@@ -1,8 +1,8 @@
 
 public class Benchmark {
 	public static void main(String[] args){
-		System.out.println("Result: " + NaiveLCS( "ACDERWDFBCDF", "BCDF") );
-
+		LCS naieve = new NaiveLCS();
+		System.out.println("Result: " + naieve.Run( "ACDERWDFBCDF", "BCDF") + " time: " + naieve.GetRunningTime() );
 
 	}
 

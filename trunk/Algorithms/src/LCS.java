@@ -15,7 +15,7 @@ public abstract class LCS {
 		endTime = System.currentTimeMillis();
 	}
 
-	public double GetRunningTime(){
+	public long GetRunningTime(){
 		if( startTime == 0 || endTime == 0 )
 			throw new IllegalStateException("Start Clock or end Clock must be used");
 		return endTime - startTime;
