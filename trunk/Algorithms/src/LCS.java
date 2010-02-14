@@ -4,7 +4,6 @@ public abstract class LCS {
 	protected long endTime=0;
 	protected int recursiveCalls=0;
 
-
 	public abstract String Run( String S, String T );
 
 	protected void StartClock(){
@@ -13,6 +12,10 @@ public abstract class LCS {
 
 	protected void StopClock(){
 		endTime = System.currentTimeMillis();
+	}
+
+	public int GetRecursiveCalls(){
+		return recursiveCalls;
 	}
 
 	public long GetRunningTime(){
