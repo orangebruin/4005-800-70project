@@ -15,11 +15,11 @@ public class NaiveLCS extends LCS {
 		if( s.length() == 0 || t.length() == 0)
 			return "";
 		if( s.charAt(0) == t.charAt(0) ){
+			recursiveCalls++;
 			return s.charAt(0) + LCS( s.substring(1), t.substring(1) );
 		}
-		recursiveCalls++;
+		recursiveCalls += 2;
 		String result1 = LCS( s.substring(1), t );
-		recursiveCalls++;
 		String result2 = LCS( s, t.substring(1) );
 		return ( result1.length() > result2.length() ? result1 : result2);
 	}
