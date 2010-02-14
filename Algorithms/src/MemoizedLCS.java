@@ -29,10 +29,16 @@ public class MemoizedLCS extends LCS{
 			return result;
 
 		if( s.charAt(0) == t.charAt(0) ){
+			recursiveCalls++;
 			return s.charAt(0) + MLCS( s.substring(1), t.substring(1) );
 		}
+
+		recursiveCalls++;
 		String result1 = MLCS( s.substring(1), t );
+
+		recursiveCalls++;
 		String result2 = MLCS( s, t.substring(1) );
+
 		result = (result1.length() > result2.length() ? result1 : result2);
 		mTable.put(new Pair<String,String>(s,t), result);
 		return result;
