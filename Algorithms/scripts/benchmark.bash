@@ -1,7 +1,7 @@
 #!/bin/bash
 ALGO="1 2 3 4"
 INPUT_SET="0 1 2 3 4"
-BENCHMARK_SET="0 1"
+BENCHMARK_SET="0 1 2 3"
 
 
 #Run standard input set tests

@@ -18,7 +18,7 @@ public class Benchmark {
 	private static final boolean VERBOSE = Boolean.parseBoolean(System.getProperty("verbose", "false"));
 	private static final boolean CSV = Boolean.parseBoolean(System.getProperty("csv", "false"));
 	private static final long INCREMENT_THRESHOLD = Long.parseLong(System.getProperty("it", "250") );
-	private static final int INCREMENT_AMOUNT = Integer.parseInt(System.getProperty("ia", "10") );
+	private static final int INCREMENT_AMOUNT = Integer.parseInt(System.getProperty("ia", "1") );
 
 	/**
 	 * The main method.
@@ -77,7 +77,7 @@ public class Benchmark {
 	 */
 	private static void timing( LCS alg, String str1, String str2 ){
 		long time=0;			//The total time taken
-		int recursiveCalls=0;	//The number of recursive calls
+		long recursiveCalls=0;	//The number of recursive calls
 		String out;				//The longest common subsequence
 
 		for( int i=0; i < NUM_RUNS; i++){
@@ -106,16 +106,16 @@ public class Benchmark {
 		long totalTime = 0;		//The total time taken for test
 		long time = 0;			//Time for individual run
 		long prevTime = 0;		//Time for last run
-		int size = 10;			//The length of the inputs
-		int increment = 10;		//Value length is increased by
+		int size = 5;			//The length of the inputs
+		int increment = 1;		//Value length is increased by
 		String out;				//The longest common subsequence
 
 		try{
 			while( time < RUNNING_TIME ){
 				prevTime = time;
 				alg.ClearRunningTime();
-				out = alg.Run(randomString(characterSet, size), randomString(
-						characterSet, size));
+				out = alg.Run(randomString(characterSet, SEED, size), randomString(
+						characterSet, SEED+1, size));
 				if( VERBOSE ){
 					System.out.println("Size: " + size + " Time:  " + time
 							+ " LCS: " + out + "\n");
@@ -144,8 +144,8 @@ public class Benchmark {
 	 * @param length		- the desired length of the string
 	 * @return	the randomly created string
 	 */
-	private static String randomString( String characterSet, int length){
-		Random rand = new Random(SEED);
+	private static String randomString( String characterSet, long seed, int length){
+		Random rand = new Random(seed);
 		String out = "";
 		for( int i=0; i < length; i++)
 			out += characterSet.charAt(rand.nextInt(characterSet.length()));

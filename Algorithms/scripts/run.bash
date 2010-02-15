@@ -15,7 +15,7 @@ INPUT_DIR=inputs/
 CLASSPATH=../bin/
 
 #JVM Args
-JVM_ARGS="-classpath ../bin -Xmx512m"
+JVM_ARGS="-classpath ../bin -Xmx1024m"
 
 if [ $MODE = "timing" ]; then
 	# Get args from input file
@@ -36,7 +36,7 @@ elif [ $MODE = "benchmark" ]; then
 		ARGS[$count]=$line
 		((count++))
 	done < 'inputs/benchmark'$INPUT'.txt'
-	java $JVM_ARGS Benchmark $ALG ABCD 
+	java $JVM_ARGS -Dcsv=true Benchmark $ALG ATCG 
 else
       # Get args from input file
         ARGS=( )
