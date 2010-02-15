@@ -59,6 +59,7 @@ public class Hirschberg extends LCS {
 			//Make recursive calls
 			String C1 = algoC(i, k, a.substring(0, i), b.substring(0, k));
 			String C2 = algoC(m-i, n-k, a.substring(i+1), b.substring(k+1));
+			recursiveCalls += 2;
 
 			//Return Strings
 			return C1+C2;
