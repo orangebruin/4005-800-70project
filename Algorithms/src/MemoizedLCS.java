@@ -7,12 +7,9 @@ public class MemoizedLCS extends LCS{
 
 	protected HashMap<Pair<String,String>, String> mTable;
 
-	public MemoizedLCS(){
-		mTable = new HashMap<Pair<String,String>, String>();
-	}
-
 	@Override
 	public String Run(String s, String t) {
+		mTable = new HashMap<Pair<String,String>, String>();
 		String result;
 		StartClock();
 		result = MLCS(s,t);
