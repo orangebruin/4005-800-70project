@@ -16,6 +16,7 @@ public class Benchmark {
 	private static final long SEED = Long.parseLong(System.getProperty("seed", "0") );
 	private static final long RUNNING_TIME = Long.parseLong(System.getProperty("running_time", "10000"));
 	private static final boolean VERBOSE = Boolean.parseBoolean(System.getProperty("verbose", "false"));
+	private static final boolean CSV = Boolean.parseBoolean(System.getProperty("csv", "false"));
 	private static final long INCREMENT_THRESHOLD = Long.parseLong(System.getProperty("it", "250") );
 	private static final int INCREMENT_AMOUNT = Integer.parseInt(System.getProperty("ia", "10") );
 
@@ -118,6 +119,9 @@ public class Benchmark {
 				if( VERBOSE ){
 					System.out.println("Size: " + size + " Time:  " + time
 							+ " LCS: " + out + "\n");
+				}
+				if( CSV ){
+					System.out.println(size + "," + time +"," + alg.GetRecursiveCalls() );
 				}
 				time = alg.GetRunningTime();
 				totalTime += alg.GetRunningTime();
