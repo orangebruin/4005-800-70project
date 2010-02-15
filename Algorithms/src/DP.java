@@ -1,6 +1,21 @@
+/**
+ * DP.java
+ *
+ * This class runs the dynamic programming longest common subsequence algorithm.
+ *
+ * @author Alex Brooks
+ * @author Kevin Cheek
+ */
 
 public class DP extends LCS {
 
+	/**
+	 * This method performs the algorithm.
+	 *
+	 * @param S - The first input string
+	 * @param T - The second input string
+	 * @return	- The longest common subsequence of the two strings
+	 */
 	@Override
 	public String Run(String S, String T) {
 		int cur, len1 = S.length(), len2 = T.length();
