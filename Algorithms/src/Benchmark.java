@@ -5,7 +5,7 @@ public class Benchmark {
 	private static final int NUM_RUNS = Integer.parseInt(System.getProperty("nruns", "10") );
 	private static final long SEED = Long.parseLong(System.getProperty("seed", "0") );
 	private static final long RUNNING_TIME = Long.parseLong(System.getProperty("running_time", "10000"));
-	private static final boolean VERBOSE = Boolean.parseBoolean(System.getProperty("verbose", "true"));
+	private static final boolean VERBOSE = Boolean.parseBoolean(System.getProperty("verbose", "false"));
 
 	public static void main(String[] args) {
 		LCS alg = null;
@@ -26,11 +26,10 @@ public class Benchmark {
 				alg = new MemoizedLCS();
 				break;
 			case 3:
-				//dynamic programming
-
+				alg = new DP();
 				break;
 			case 4:
-				//Quadratic-time linear-space
+				alg = new Hirschberg();
 
 				break;
 			default:
@@ -83,8 +82,8 @@ public class Benchmark {
 				totalTime += alg.GetRunningTime();
 				size += 10;
 			}
-		}catch(StackOverflowError e){
-			System.err.println("Stack Error" );
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 		System.out.println("Max String Size (2x): " + size + " Total Time: " + totalTime + " Last Run Time: "+ time);
 	}
