@@ -27,7 +27,7 @@ if [ $MODE = "timing" ]; then
 		ARGS[$count]=$line
 		((count++))
 	done < 'Inputs/Input'$INPUT'.txt'
-
+	echo "java $JVM_ARGS Benchmark $ALG  ${ARGS[0]} ${ARGS[1]}"
 	java $JVM_ARGS Benchmark $ALG  ${ARGS[0]} ${ARGS[1]}
 else
 	# Get args from input file
