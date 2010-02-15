@@ -25,7 +25,7 @@ if [ $MODE = "timing" ]; then
 	do
 		ARGS[$count]=$line
 		((count++))
-	done < 'Inputs/Input'$INPUT'.txt'
+	done < 'inputs/input'$INPUT'.txt'
 	java $JVM_ARGS Benchmark $ALG  ${ARGS[0]} ${ARGS[1]}
 elif [ $MODE = "benchmark" ]; then
 	# Get args from input file
@@ -35,7 +35,7 @@ elif [ $MODE = "benchmark" ]; then
 	do
 		ARGS[$count]=$line
 		((count++))
-	done < 'Inputs/benchmark'$INPUT'.txt'
+	done < 'inputs/benchmark'$INPUT'.txt'
 	java $JVM_ARGS Benchmark $ALG ABCD 
 else
       # Get args from input file
@@ -45,6 +45,6 @@ else
         do
                 ARGS[$count]=$line
                 ((count++))
-        done < 'Inputs/input_max.txt'
+        done < 'inputs/input_max.txt'
 	java $JVM_ARGS -Dnruns=1 -Dverbose=true Benchmark $ALG ${ARGS[0]} ${ARGS[1]}
 fi
