@@ -43,7 +43,7 @@ public class Hirschberg extends LCS {
 			int L1[] = algoB(i, n, a.substring(0, i), b);
 			String aRev = new String ( new StringBuffer(a).reverse() );
 			String bRev = new String ( new StringBuffer(b).reverse() );
-			int L2[] = algoB(m-i, n, aRev.substring(0, i-1), bRev );
+			int L2[] = algoB(m-i, n, aRev.substring(0, m-i), bRev );
 
 			//Find split point for recursive calls
 			int k = 0, M = L1[0] + L2[0];
@@ -58,7 +58,7 @@ public class Hirschberg extends LCS {
 
 			//Make recursive calls
 			String C1 = algoC(i, k, a.substring(0, i), b.substring(0, k));
-			String C2 = algoC(m-i, n-k, a.substring(i+1), b.substring(k+1));
+			String C2 = algoC(m-i, n-k, a.substring(i), b.substring(k));
 			recursiveCalls += 2;
 
 			//Return Strings
@@ -70,18 +70,18 @@ public class Hirschberg extends LCS {
 		int mat[][] = new int[2][n+1];
 
 		//Initialize table
-		for( int j = 0; j < n; j++ ){
+		for( int j = 0; j < n+1; j++ ){
 			mat[1][j] = 0;
 		}
 
 		//Find length of LCS in linear space
-		for( int i = 1; i < m; i++ ){
-			for( int j = 0; j < n; j++ ){
+		for( int i = 1; i < m+1; i++ ){
+			for( int j = 1; j < n+1; j++ ){
 				mat[0][j] = mat[1][j];
 			}
 
-			for( int j = 1; j < n; j++ ){
-				if( a.charAt(i) == b.charAt(j) ){
+			for( int j = 1; j < n+1; j++ ){
+				if( a.charAt(i-1) == b.charAt(j-1) ){
 					mat[1][j] = mat[0][j-1] + 1;
 				} else {
 					if( mat[1][j-1] > mat[0][j] )
