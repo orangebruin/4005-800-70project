@@ -6,6 +6,9 @@ public class Benchmark {
 	private static final long SEED = Long.parseLong(System.getProperty("seed", "0") );
 	private static final long RUNNING_TIME = Long.parseLong(System.getProperty("running_time", "10000"));
 	private static final boolean VERBOSE = Boolean.parseBoolean(System.getProperty("verbose", "false"));
+	private static final long INCREMENT_THRESHOLD = Long.parseLong(System.getProperty("it", "250") );
+	private static final int INCREMENT_AMOUNT = Integer.parseInt(System.getProperty("ia", "10") );
+
 
 	public static void main(String[] args) {
 		LCS alg = null;
@@ -67,10 +70,13 @@ public class Benchmark {
 	private static void benchmark(LCS alg, String characterSet){
 		long totalTime = 0;
 		long time=0;
+		long prevTime=0;
 		int size=10;
+		int increment=10;
 		String out;
 		try{
 			while( time < RUNNING_TIME ){
+				prevTime = time;
 				alg.ClearRunningTime();
 				out = alg.Run(randomString(characterSet, size), randomString(
 						characterSet, size));
@@ -80,7 +86,9 @@ public class Benchmark {
 				}
 				time = alg.GetRunningTime();
 				totalTime += alg.GetRunningTime();
-				size += 10;
+				if( time - prevTime < INCREMENT_THRESHOLD )
+					increment += INCREMENT_AMOUNT;
+				size += increment;
 			}
 		}catch(Exception e){
 			e.printStackTrace();
