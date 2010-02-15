@@ -18,7 +18,6 @@ CLASSPATH=../bin/
 JVM_ARGS="-classpath ../bin -Xmx512m"
 
 if [ $MODE = "timing" ]; then
-
 	# Get args from input file
 	ARGS=( )
 	let count=0
@@ -27,9 +26,8 @@ if [ $MODE = "timing" ]; then
 		ARGS[$count]=$line
 		((count++))
 	done < 'Inputs/Input'$INPUT'.txt'
-	echo "java $JVM_ARGS Benchmark $ALG  ${ARGS[0]} ${ARGS[1]}"
 	java $JVM_ARGS Benchmark $ALG  ${ARGS[0]} ${ARGS[1]}
-else
+elif [ $MODE = "benchmark" ]; then
 	# Get args from input file
 	ARGS=( )
 	let count=0
@@ -38,7 +36,15 @@ else
 		ARGS[$count]=$line
 		((count++))
 	done < 'Inputs/benchmark'$INPUT'.txt'
-	echo "java $JVM_ARGS Benchmark $ALG ABCD"
 	java $JVM_ARGS Benchmark $ALG ABCD 
+else
+      # Get args from input file
+        ARGS=( )
+        let count=0
+        while read line
+        do
+                ARGS[$count]=$line
+                ((count++))
+        done < 'Inputs/input_max.txt'
+	java $JVM_ARGS -Dnruns=1 -Dverbose=true Benchmark $ALG ${ARGS[0]} ${ARGS[1]}
 fi
-

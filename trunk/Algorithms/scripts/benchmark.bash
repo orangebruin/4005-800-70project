@@ -3,6 +3,7 @@ ALGO="1 2 3 4"
 INPUT_SET="0 1 2 3 4"
 BENCHMARK_SET="0 1"
 
+
 #Run standard input set tests
 for A in $ALGO; do 
 	for B in $INPUT_SET; do
@@ -11,7 +12,6 @@ for A in $ALGO; do
 	done
 done
 
-#Run special case input sets
 
 #Run timing modes (eg. how much can run in 10 seconds)
 for A in $ALGO; do
@@ -20,3 +20,7 @@ for A in $ALGO; do
 		./run.bash benchmark $A $B
 	done 
 done
+
+#Run special case input sets
+echo "Timing Algorithm 4 on 40,000 character input sets"
+./run.bash max_input 4 
