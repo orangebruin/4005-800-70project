@@ -1,6 +1,21 @@
+/**
+ * Hirschberg.java
+ *
+ * This class runs Hirschberg's linear space longest common subsequence algorithm.
+ *
+ * @author Alex Brooks
+ * @author Kevin Cheek
+ */
 
 public class Hirschberg extends LCS {
 
+	/**
+	 * This method performs the algorithm.
+	 *
+	 * @param S - The first input string
+	 * @param T - The second input string
+	 * @return	- The longest common subsequence of the two strings
+	 */
 	@Override
 	public String Run(String S, String T) {
 
@@ -17,6 +32,15 @@ public class Hirschberg extends LCS {
 		return lcs;
 	}
 
+	/**
+	 * Performs Hirschberg's linear space LCS algorithm.
+	 *
+	 * @param m - length of input string 1
+	 * @param n - length of input string 2
+	 * @param a - input string 1
+	 * @param b - input string 2
+	 * @return the longest common subsequence
+	 */
 	private String algoC(int m, int n, String a, String b){
 		//Check recursion conditions
 		if( n == 0 ){
@@ -66,6 +90,15 @@ public class Hirschberg extends LCS {
 		}
 	}
 
+	/**
+	 * Finds the length of the LCS of the two given strings in linear space.
+	 *
+	 * @param m - length of input string 1
+	 * @param n - length of input string 2
+	 * @param a - input string 1
+	 * @param b - input string 2
+	 * @return the longest common subsequence
+	 */
 	private int[] algoB(int m, int n, String a, String b){
 		int mat[][] = new int[2][n+1];
 
