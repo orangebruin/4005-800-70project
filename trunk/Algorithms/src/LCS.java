@@ -15,7 +15,7 @@ public abstract class LCS {
 	protected long endTime=0;
 
 	//The number of recursive calls done by the algorithm
-	protected int recursiveCalls=0;
+	protected long recursiveCalls=0;
 
 	/**
 	 * This method performs the algorithm.
@@ -52,7 +52,7 @@ public abstract class LCS {
 	 *
 	 * @return the number of recursive calls
 	 */
-	public int GetRecursiveCalls(){
+	public long GetRecursiveCalls(){
 		return recursiveCalls;
 	}
 
