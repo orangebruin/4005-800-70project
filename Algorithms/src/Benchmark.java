@@ -43,7 +43,7 @@ public class Benchmark {
 				timing( alg, args[1], args[2]);
 				break;
 			case 2:
-				benchmark( alg, args[0] );
+				benchmark( alg, args[1] );
 		}
 
 	}
@@ -57,6 +57,7 @@ public class Benchmark {
 			if( VERBOSE ){
 				System.out.println("LCS: "+ out + "\n");
 			}
+			time += alg.GetRunningTime();
 			recursiveCalls = alg.GetRecursiveCalls();
 			alg.ClearRunningTime();
 		}
@@ -69,15 +70,21 @@ public class Benchmark {
 		long time=0;
 		int size=10;
 		String out;
-		while( time < RUNNING_TIME){
-			alg.ClearRunningTime();
-			out = alg.Run(randomString( characterSet, size), randomString( characterSet, size));
-			if( VERBOSE ){
-				System.out.println("LCS: "+ out + "\n");
+		try{
+			while( time < RUNNING_TIME ){
+				alg.ClearRunningTime();
+				out = alg.Run(randomString(characterSet, size), randomString(
+						characterSet, size));
+				if( VERBOSE ){
+					System.out.println("Size: " + size + " Time:  " + time
+							+ " LCS: " + out + "\n");
+				}
+				time = alg.GetRunningTime();
+				totalTime += alg.GetRunningTime();
+				size += 10;
 			}
-			time = alg.GetRunningTime();
-			totalTime += alg.GetRunningTime();
-			size++;
+		}catch(StackOverflowError e){
+			System.err.println("Stack Error" );
 		}
 		System.out.println("Max String Size (2x): " + size + " Total Time: " + totalTime + " Last Run Time: "+ time);
 	}
